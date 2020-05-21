@@ -1,6 +1,10 @@
 package com.perugu.goutham.newsapp
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import com.perugu.goutham.newsapp.db.SourceTypeConverter
 
 data class NewsFeeds(
     @SerializedName("articles")
@@ -13,7 +17,14 @@ data class NewsFeeds(
     val totalResults: Int
 )
 
+@Entity(tableName = "Articles", primaryKeys = ["author", "content", "description", "publishedAt", "source", "title", "url", "urlToImage"])
+
+/*There is no proper id in the data to maintain as primary key,
+hence we are considering all fields as primarykey*/
+
+@TypeConverters(SourceTypeConverter::class)
 data class Article(
+
     @SerializedName("author")
     val author: String,
 

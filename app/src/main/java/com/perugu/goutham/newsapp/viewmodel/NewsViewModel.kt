@@ -1,18 +1,23 @@
 package com.perugu.goutham.newsapp.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
+import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.repository.NetworkRequestRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
 
-class NewsViewModel: ViewModel() {
+class NewsViewModel(
+    private val networkRequestRepository: NetworkRequestRepository
+) : ViewModel() {
 
-    fun fetchNewsFeeds(okHttpClient: OkHttpClient, gson: Gson) {
+    val newsFeedsLiveData: LiveData<List<Article>>
+    get() = networkRequestRepository.newsDb.newsFeedDao().getNewsFeeds()
+
+    fun fetchNewsFeeds() {
         viewModelScope.launch(Dispatchers.IO){
-            NetworkRequestRepository().fetchNewsFeeds(okHttpClient, gson)
+            networkRequestRepository.fetchNewsFeeds()
         }
     }
 

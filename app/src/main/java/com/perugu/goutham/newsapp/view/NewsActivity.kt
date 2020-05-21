@@ -2,24 +2,32 @@ package com.perugu.goutham.newsapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import com.perugu.goutham.newsapp.R
+import com.perugu.goutham.newsapp.db.DataBaseHolder
+import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
 import okhttp3.OkHttpClient
 
 class NewsActivity : AppCompatActivity() {
 
-    private val newsViewModel by viewModels<NewsViewModel>()
+    private val newsViewModel: NewsViewModel by viewModels {
+        NewsFeedViewModelFactory(OkHttpClient(), Gson(), DataBaseHolder.getDatabase(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val okHttpClient = OkHttpClient()
+        newsViewModel.fetchNewsFeeds()
 
-        val gson = Gson()
-
-        newsViewModel.fetchNewsFeeds(okHttpClient, gson)
+        newsViewModel.newsFeedsLiveData.observe(this, Observer {
+            it.forEach {
+                Log.e("LiveData", "${it.author}")
+            }
+        })
     }
 }

@@ -1,8 +1,11 @@
-package com.perugu.goutham.newsapp
+package com.perugu.goutham.newsapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.google.gson.Gson
+import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
+import com.perugu.goutham.newsapp.R
 import okhttp3.OkHttpClient
 
 class NewsActivity : AppCompatActivity() {
@@ -15,6 +18,8 @@ class NewsActivity : AppCompatActivity() {
 
         val okHttpClient = OkHttpClient()
 
-        newsViewModel.fetchNewsFeeds(okHttpClient)
+        val gson = Gson()
+
+        newsViewModel.fetchNewsFeeds(okHttpClient, gson)
     }
 }

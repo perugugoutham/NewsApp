@@ -1,10 +1,10 @@
 package com.perugu.goutham.newsapp
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.perugu.goutham.newsapp.db.SourceTypeConverter
+import java.util.*
 
 data class NewsFeeds(
     @SerializedName("articles")
@@ -35,7 +35,7 @@ data class Article(
     val description: String,
 
     @SerializedName("publishedAt")
-    val publishedAt: String,
+    val publishedAt: Date,
 
     @SerializedName("source")
     val source: Source,

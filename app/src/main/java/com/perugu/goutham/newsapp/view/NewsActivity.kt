@@ -1,16 +1,17 @@
 package com.perugu.goutham.newsapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
-import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.db.DataBaseHolder
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
+import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import okhttp3.OkHttpClient
+
 
 class NewsActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class NewsActivity : AppCompatActivity() {
 
         newsViewModel.newsFeedsLiveData.observe(this, Observer {
             it.forEach {
-                Log.e("LiveData", "${it.author}")
+                Log.e("LiveData "," ${it.publishedAt.time}")
             }
         })
     }

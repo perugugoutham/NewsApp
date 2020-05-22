@@ -47,7 +47,7 @@ class NewsFeedsAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            iTalkToFragment.onNewsFeedClicked(article)
+            iTalkToFragment.onNewsFeedClicked(article.url)
         }
     }
 

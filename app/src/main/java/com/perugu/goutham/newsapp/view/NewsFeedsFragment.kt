@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
-import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
 import com.perugu.goutham.newsapp.dagger.network_request_coroutine
@@ -82,13 +81,12 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
 
     }
 
-    override fun onNewsFeedClicked(article: Article) {
-        newsViewModel.updateSelectedArticle(article)
-        findNavController().navigate(R.id.action_newsFeedsFragment_to_newsDetailsFragment)
+    override fun onNewsFeedClicked(id: String) {
+        findNavController().navigate(NewsFeedsFragmentDirections.actionNewsFeedsFragmentToNewsDetailsFragment(id))
     }
 }
 
 interface ITalkToFragment{
-    fun onNewsFeedClicked(article: Article)
+    fun onNewsFeedClicked(id: String)
 }
 

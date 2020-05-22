@@ -67,8 +67,7 @@ class InstrumentedTest {
         newsViewModel.fetchNewsFeeds()
         val value = getValue(newsViewModel.newsFeedsLiveData)
         val article = value[2]
-        newsViewModel.updateSelectedArticle(article)
-        val selectedAirtcle = getValue(newsViewModel.selectedArticle)
+        val selectedAirtcle = getValue(newsViewModel.getArticle(article.url))
         selectedAirtcle shouldBe article
     }
 

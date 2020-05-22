@@ -16,4 +16,7 @@ interface NewsFeedDao {
     @Query("SELECT * from Articles ORDER BY  publishedAt DESC")
     fun getNewsFeeds(): LiveData<List<Article>>
 
+    @Query("SELECT * from Articles WHERE url=:id")
+    fun getArticle(id: String): LiveData<Article>
+
 }

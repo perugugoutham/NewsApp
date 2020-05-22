@@ -7,6 +7,7 @@
         android:id="@+id/newsFeedsFragment"
         android:name="com.perugu.goutham.newsapp.view.NewsFeedsFragment"
         android:label="NewsFeedsFragment" >
+
         <action
             android:id="@+id/action_newsFeedsFragment_to_newsDetailsFragment"
             app:destination="@id/newsDetailsFragment"
@@ -19,5 +20,11 @@
     <fragment
         android:id="@+id/newsDetailsFragment"
         android:name="com.perugu.goutham.newsapp.view.NewsDetailsFragment"
-        android:label="NewsDetailsFragment" />
+        android:label="NewsDetailsFragment">
+
+        <argument
+            android:name="selectId"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

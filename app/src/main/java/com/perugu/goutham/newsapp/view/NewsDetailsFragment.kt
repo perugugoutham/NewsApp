@@ -75,7 +75,9 @@ class NewsDetailsFragment: Fragment() {
 
         val date = requireView().findViewById<TextView>(R.id.date)
 
-        newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {article ->
+        val newsDetailsFragmentArgs = NewsDetailsFragmentArgs.fromBundle(arguments!!)
+
+        newsViewModel.getArticle(newsDetailsFragmentArgs.selectId).observe(viewLifecycleOwner, Observer {article ->
             description.text = getString(R.string.click_for_more, article.description)
             title.text = article.title
             source.text = article.source?.name

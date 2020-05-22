@@ -34,6 +34,8 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
     @Inject
     lateinit var picassoClient: Picasso
 
+    private var newsFeedsAdapter: NewsFeedsAdapter?= null
+
     private val newsViewModel: NewsViewModel by activityViewModels {
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
         NewsFeedViewModelFactory(okHttpClient, gson, newsDatabase)
@@ -52,20 +54,16 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
 
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
 
-        val newsFeedsAdapter: NewsFeedsAdapter
-
         val feedsRecyclerView = requireView().findViewById<RecyclerView>(R.id.feeds_recycler_view)
 
-        if (feedsRecyclerView.adapter == null){
+        if (newsFeedsAdapter == null){
             newsFeedsAdapter = NewsFeedsAdapter(arrayListOf(), this, picassoClient)
-        }else{
-            newsFeedsAdapter = feedsRecyclerView.adapter as NewsFeedsAdapter
         }
 
         feedsRecyclerView.adapter = newsFeedsAdapter
 
         newsViewModel.newsFeedsLiveData.observe(viewLifecycleOwner, Observer {
-            newsFeedsAdapter.updateList(it)
+            newsFeedsAdapter?.updateList(it)
         })
 
     }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.R
@@ -47,9 +48,40 @@ class NewsFeedsAdapter(
         }
     }
 
-    fun updateList(articles: List<Article>) {
-        this.articles = articles
-        notifyDataSetChanged()
+    fun updateList(newArticles: List<Article>) {
+        val oldArticles = this.articles
+        this.articles = newArticles
+        val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldArticles[oldItemPosition] == newArticles[newItemPosition]
+            }
+
+            override fun getOldListSize(): Int {
+                return oldArticles.size
+            }
+
+            override fun getNewListSize(): Int {
+                return newArticles.size
+            }
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                val oldArticle = oldArticles[oldItemPosition]
+                val newArticle = newArticles[newItemPosition]
+
+                return oldArticle.title == newArticle.title
+                        && oldArticle.author == newArticle.author
+                        && oldArticle.content == newArticle.content
+                        && oldArticle.description == newArticle.description
+                        && oldArticle.publishedAt == newArticle.publishedAt
+                        && oldArticle.source == newArticle.source
+                        && oldArticle.url == newArticle.url
+                        && oldArticle.urlToImage == newArticle.urlToImage
+            }
+
+        }, true)
+
+        diffResult.dispatchUpdatesTo(this)
+
     }
 
 

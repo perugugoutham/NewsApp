@@ -1,5 +1,7 @@
 package com.perugu.goutham.newsapp.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import okhttp3.OkHttpClient
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+
 
 class NewsDetailsFragment: Fragment() {
 
@@ -57,16 +60,25 @@ class NewsDetailsFragment: Fragment() {
         view.findViewById<ImageView>(R.id.back_button).setOnClickListener {
             findNavController().popBackStack()
         }
+        val description = requireView().findViewById<TextView>(R.id.description)
+        val title = requireView().findViewById<TextView>(R.id.title)
+        val source = requireView().findViewById<TextView>(R.id.source)
 
-        newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {
-            requireView().findViewById<TextView>(R.id.description).text = it.description
-            requireView().findViewById<TextView>(R.id.title).text = it.title
-            requireView().findViewById<TextView>(R.id.source).text = it.source.name
+        val simpleDateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.US)
 
-            val simpleDateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.US)
-            requireView().findViewById<TextView>(R.id.date).text = simpleDateFormat.format(it.publishedAt)
+        val date = requireView().findViewById<TextView>(R.id.date)
 
-            picassoClient.load(it.urlToImage).into(requireView().findViewById<ImageView>(R.id.thumbnail_image))
+        newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {article ->
+            description.text = getString(R.string.click_for_more, article.description)
+            title.text = article.title
+            source.text = article.source.name
+            date.text = simpleDateFormat.format(article.publishedAt)
+
+            picassoClient.load(article.urlToImage).into(requireView().findViewById<ImageView>(R.id.thumbnail_image))
+            description.setOnClickListener {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+                startActivity(browserIntent)
+            }
         })
     }
 

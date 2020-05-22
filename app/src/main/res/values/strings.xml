@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NewsApp</string>
     <string name="headlines">Headlines</string>
+    <string name="click_for_more">%1$s Click for more</string>
 </resources>

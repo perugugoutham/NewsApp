@@ -62,6 +62,16 @@ class InstrumentedTest {
 
     }
 
+    @Test
+    fun selectedAirtcleTest(){
+        newsViewModel.fetchNewsFeeds()
+        val value = getValue(newsViewModel.newsFeedsLiveData)
+        val article = value[2]
+        newsViewModel.updateSelectedArticle(article)
+        val selectedAirtcle = getValue(newsViewModel.selectedArticle)
+        selectedAirtcle shouldBe article
+    }
+
     @After
     fun closeDb(){
         newsDb.close()

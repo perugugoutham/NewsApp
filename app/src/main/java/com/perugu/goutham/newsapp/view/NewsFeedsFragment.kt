@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
 import com.perugu.goutham.newsapp.dagger.network_request_coroutine
 import com.perugu.goutham.newsapp.db.NewsDb
+import com.perugu.goutham.newsapp.viewmodel.LoaderState
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import com.squareup.picasso.Picasso
@@ -42,6 +44,8 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
     lateinit var networkRequestCoroutine: CoroutineDispatcher
 
     private var newsFeedsAdapter: NewsFeedsAdapter?= null
+
+    private var oldLoaderState: LoaderState? = null
 
     private val newsViewModel: NewsViewModel by activityViewModels {
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
@@ -75,8 +79,22 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
         feedsRecyclerView.adapter = newsFeedsAdapter
 
         newsViewModel.newsFeedsLiveData.observe(viewLifecycleOwner, Observer {
-            swipeRefreshLayout.isRefreshing = false
             newsFeedsAdapter?.updateList(it)
+        })
+
+        newsViewModel.getLoaderState().observe(viewLifecycleOwner, Observer {
+            if (oldLoaderState == null || oldLoaderState != it){
+                when(it){
+                    LoaderState.LOADING -> swipeRefreshLayout.isRefreshing = true
+                    LoaderState.SUCCESS -> swipeRefreshLayout.isRefreshing = false
+                    LoaderState.FAILED -> {
+                        swipeRefreshLayout.isRefreshing = false
+                        Toast.makeText(requireContext(), getString(R.string.network_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
+                oldLoaderState = it
+            }
+
         })
 
     }

@@ -17,30 +17,8 @@ import javax.inject.Inject
 
 class NewsActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var okHttpClient: OkHttpClient
-
-    @Inject
-    lateinit var gson: Gson
-
-    @Inject
-    lateinit var newsDatabase: NewsDb
-
-    private val newsViewModel: NewsViewModel by viewModels {
-        NewsAppComponentProvider.getNewsAppComponent(this).inject(this)
-        NewsFeedViewModelFactory(okHttpClient, gson, newsDatabase)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        newsViewModel.fetchNewsFeeds()
-
-        newsViewModel.newsFeedsLiveData.observe(this, Observer {
-            it.forEach {
-                Log.e("LiveData "," ${it.publishedAt.time}")
-            }
-        })
     }
 }

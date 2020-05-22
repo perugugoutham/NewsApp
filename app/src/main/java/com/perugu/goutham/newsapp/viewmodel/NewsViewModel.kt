@@ -16,6 +16,10 @@ class NewsViewModel(
 
     private var coroutineDispatcher = Dispatchers.IO
 
+    init {
+        fetchNewsFeeds()
+    }
+
     val newsFeedsLiveData: LiveData<List<Article>>
     get() = networkRequestRepository.newsDb.newsFeedDao().getNewsFeeds()
 

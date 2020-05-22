@@ -12,10 +12,10 @@ data class NewsFeeds(
     val articles: List<Article>,
 
     @SerializedName("status")
-    val status: String,
+    val status: String?,
 
     @SerializedName("totalResults")
-    val totalResults: Int
+    val totalResults: Int?
 )
 
 @Entity(tableName = "Articles")
@@ -24,35 +24,35 @@ data class NewsFeeds(
 data class Article(
 
     @SerializedName("author")
-    val author: String,
+    val author: String?,
 
     @SerializedName("content")
-    val content: String,
+    val content: String?,
 
     @SerializedName("description")
-    val description: String,
+    val description: String?,
 
     @SerializedName("publishedAt")
-    val publishedAt: Date,
+    val publishedAt: Date?,
 
     @SerializedName("source")
-    val source: Source,
+    val source: Source?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @PrimaryKey
     @SerializedName("url")
     val url: String,
 
     @SerializedName("urlToImage")
-    val urlToImage: String
+    val urlToImage: String?
 )
 
 data class Source(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
 
     @SerializedName("name")
-    val name: String
+    val name: String?
 )

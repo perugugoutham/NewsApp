@@ -38,10 +38,13 @@ class NewsFeedsAdapter(
 
         holder.title.text = article.title
 
-        holder.source.text = article.source.name
+        holder.source.text = article.source?.name
 
         val simpleDateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.US)
-        holder.date.text = simpleDateFormat.format(article.publishedAt)
+
+        if (article.publishedAt != null){
+            holder.date.text = simpleDateFormat.format(article.publishedAt)
+        }
 
         holder.itemView.setOnClickListener {
             iTalkToFragment.onNewsFeedClicked(article)

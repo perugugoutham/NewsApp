@@ -78,8 +78,10 @@ class NewsDetailsFragment: Fragment() {
         newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {article ->
             description.text = getString(R.string.click_for_more, article.description)
             title.text = article.title
-            source.text = article.source.name
-            date.text = simpleDateFormat.format(article.publishedAt)
+            source.text = article.source?.name
+            if (article.publishedAt != null){
+                date.text = simpleDateFormat.format(article.publishedAt)
+            }
 
             picassoClient.load(article.urlToImage).into(requireView().findViewById<ImageView>(R.id.thumbnail_image))
             description.setOnClickListener {

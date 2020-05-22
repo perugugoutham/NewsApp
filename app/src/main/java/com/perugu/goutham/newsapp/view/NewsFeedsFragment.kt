@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.R
@@ -54,6 +55,11 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
 
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
 
+        val swipeRefreshLayout = requireView().findViewById<SwipeRefreshLayout>(R.id.swipe_to_refresh)
+        swipeRefreshLayout.setOnRefreshListener {
+            newsViewModel.fetchNewsFeeds()
+        }
+
         val feedsRecyclerView = requireView().findViewById<RecyclerView>(R.id.feeds_recycler_view)
 
         if (newsFeedsAdapter == null){
@@ -63,6 +69,7 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
         feedsRecyclerView.adapter = newsFeedsAdapter
 
         newsViewModel.newsFeedsLiveData.observe(viewLifecycleOwner, Observer {
+            swipeRefreshLayout.isRefreshing = false
             newsFeedsAdapter?.updateList(it)
         })
 

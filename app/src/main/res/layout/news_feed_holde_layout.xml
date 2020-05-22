@@ -1,12 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/card_padding_start"
+    android:layout_marginTop="@dimen/card_top_padding"
+    android:layout_marginEnd="@dimen/card_padding_start"
+    android:layout_marginBottom="@dimen/card_top_padding"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="false">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/title"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumbail_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fedd_thumbnail_height"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/sample" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/feeds_thumbnail_gradient"
+            app:layout_constraintBottom_toBottomOf="@id/thumbail_image"
+            app:layout_constraintEnd_toEndOf="@id/thumbail_image"
+            app:layout_constraintStart_toStartOf="@id/thumbail_image"
+            app:layout_constraintTop_toBottomOf="@id/guide_line" />
+
+        <TextView
+            android:id="@+id/feed_title"
+            style="@style/FeedTitleStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/title_margin_bottom"
+            android:paddingStart="@dimen/title_padding_start"
+            android:paddingEnd="@dimen/title_padding_start"
+            app:layout_constraintBottom_toTopOf="@id/source"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Boeing decides $100 million to victims of 735Max crashes" />
+
+        <TextView
+            android:id="@+id/source"
+            style="@style/FeedSourceStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/source_margin_bottom"
+            android:paddingStart="@dimen/title_padding_start"
+            android:paddingEnd="@dimen/title_padding_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Tech Crunch" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/FeedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/source"
+            app:layout_constraintStart_toEndOf="@id/source"
+            app:layout_constraintTop_toTopOf="@id/source"
+            tools:text="20019-10-21" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

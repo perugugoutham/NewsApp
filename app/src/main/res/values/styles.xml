@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FeedTitleStyle" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/roboto_slab_regular</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/feedTitleColor</item>
+    </style>
+
+    <style name="FeedDate" parent="AppTheme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/feedSourceColor</item>
+    </style>
+
+    <style name="FeedSourceStyle" parent="FeedDate">
+        <item name="android:fontFamily">@font/roboto_slab_bold</item>
+    </style>
+
+    <style name="ToolBarTextStyle" parent="AppTheme">
+        <item name="android:textSize">29sp</item>
+        <item name="android:fontFamily">@font/roboto_slab_bold</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textColor">@color/toolBarTextColor</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">true</item>
+
+    </style>
+
 </resources>

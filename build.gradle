@@ -8,6 +8,7 @@ buildscript {
         room_db = "2.2.5"
         stetho = "1.5.1"
         nav_host = "2.2.2"
+        picasso = "2.71828"
     }
     repositories {
         google()

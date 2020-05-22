@@ -13,7 +13,7 @@ interface NewsFeedDao {
     @Insert(onConflict = IGNORE) //using IGNORE instead if REPLACE because in our case all fields together are considered primary keys
     suspend fun storeNewsFeeds(articles: List<Article>)
 
-    @Query("SELECT * from Articles")
+    @Query("SELECT * from Articles ORDER BY  publishedAt DESC")
     fun getNewsFeeds(): LiveData<List<Article>>
 
 }

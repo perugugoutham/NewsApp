@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_padding_start">16dp</dimen>
+    <dimen name="card_top_padding">12dp</dimen>
+    <dimen name="card_radius">10dp</dimen>
+    <dimen name="fedd_thumbnail_height">300dp</dimen>
+    <dimen name="title_margin_bottom">24dp</dimen>
+    <dimen name="title_padding_start">12dp</dimen>
+    <dimen name="source_margin_bottom">12dp</dimen>
+</resources>

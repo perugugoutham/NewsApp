@@ -16,6 +16,7 @@ import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
 import com.perugu.goutham.newsapp.db.NewsDb
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
+import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
@@ -29,6 +30,9 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
 
     @Inject
     lateinit var newsDatabase: NewsDb
+
+    @Inject
+    lateinit var picassoClient: Picasso
 
     private val newsViewModel: NewsViewModel by activityViewModels {
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
@@ -46,12 +50,14 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
+
         val newsFeedsAdapter: NewsFeedsAdapter
 
         val feedsRecyclerView = requireView().findViewById<RecyclerView>(R.id.feeds_recycler_view)
 
         if (feedsRecyclerView.adapter == null){
-            newsFeedsAdapter = NewsFeedsAdapter(arrayListOf(), this)
+            newsFeedsAdapter = NewsFeedsAdapter(arrayListOf(), this, picassoClient)
         }else{
             newsFeedsAdapter = feedsRecyclerView.adapter as NewsFeedsAdapter
         }

@@ -8,11 +8,17 @@ import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import java.io.File
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
+
+
+const val network_request_coroutine = "network_request_coroutine"
 
 @Module
 class NewsAppModule(private val context: Context) {
@@ -46,6 +52,12 @@ class NewsAppModule(private val context: Context) {
             NewsDb::class.java,
             "news_feed_db"
         ).build()
+    }
+
+    @Provides
+    @Named(network_request_coroutine)
+    fun provideNetworkRequestCoRoutine(): CoroutineDispatcher {
+        return Dispatchers.IO
     }
 
     @Provides

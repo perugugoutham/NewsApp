@@ -1,21 +1,15 @@
 package com.perugu.goutham.newsapp.viewmodel
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.repository.NetworkRequestRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val networkRequestRepository: NetworkRequestRepository
 ) : ViewModel() {
-
-    private var coroutineDispatcher = Dispatchers.IO
 
     init {
         fetchNewsFeeds()
@@ -27,18 +21,11 @@ class NewsViewModel(
     val selectedArticle: MutableLiveData<Article> = MutableLiveData()
 
     fun fetchNewsFeeds() {
-        viewModelScope.launch(coroutineDispatcher){
-            networkRequestRepository.fetchNewsFeeds()
-        }
+        networkRequestRepository.fetchNewsFeeds(viewModelScope)
     }
 
     fun updateSelectedArticle(article: Article){
         selectedArticle.postValue(article)
-    }
-
-    @VisibleForTesting
-    fun setCoRoutineDispacher(coroutineDispatcher: CoroutineDispatcher){
-        this.coroutineDispatcher = coroutineDispatcher
     }
 
 }

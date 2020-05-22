@@ -15,14 +15,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
+import com.perugu.goutham.newsapp.dagger.network_request_coroutine
 import com.perugu.goutham.newsapp.db.NewsDb
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class NewsDetailsFragment: Fragment() {
@@ -39,9 +42,13 @@ class NewsDetailsFragment: Fragment() {
     @Inject
     lateinit var picassoClient: Picasso
 
+    @Inject
+    @field:Named(network_request_coroutine)
+    lateinit var networkRequestCoroutine: CoroutineDispatcher
+
     private val newsViewModel: NewsViewModel by activityViewModels {
         NewsAppComponentProvider.getNewsAppComponent(this.requireContext()).inject(this)
-        NewsFeedViewModelFactory(okHttpClient, gson, newsDatabase)
+        NewsFeedViewModelFactory(okHttpClient, gson, newsDatabase, networkRequestCoroutine)
     }
 
     override fun onCreateView(

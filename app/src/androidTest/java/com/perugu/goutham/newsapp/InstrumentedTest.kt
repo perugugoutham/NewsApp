@@ -42,11 +42,11 @@ class InstrumentedTest {
         val networkRequestRepository = NetworkRequestRepository(
             OkHttpClient(),
             Gson(),
-            newsDb
+            newsDb,
+            Dispatchers.Unconfined
         )
 
         newsViewModel = NewsViewModel(networkRequestRepository)
-        newsViewModel.setCoRoutineDispacher(Dispatchers.Unconfined)
     }
 
     @Test

@@ -53,7 +53,7 @@ class NewsFeedsAdapter(
         this.articles = newArticles
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldArticles[oldItemPosition] == newArticles[newItemPosition]
+                return oldArticles[oldItemPosition].url == newArticles[newItemPosition].url
             }
 
             override fun getOldListSize(): Int {

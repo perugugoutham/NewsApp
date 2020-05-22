@@ -32,7 +32,30 @@
         <item name="android:textColor">@color/toolBarTextColor</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAllCaps">true</item>
+    </style>
 
+    <style name="DetailsTitle" parent="AppTheme">
+        <item name="android:textSize">29sp</item>
+        <item name="android:fontFamily">@font/roboto_slab_bold</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/feedTitleColor</item>
+    </style>
+
+    <style name="DetailsDate" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/roboto_slab_regular</item>
+        <item name="android:textColor">@color/feedTitleColor</item>
+    </style>
+
+    <style name="DetailsSource" parent="DetailsDate">
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="DetailsDescription" parent="AppTheme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/feedSourceColor</item>
+        <item name="android:fontFamily">@font/roboto_slab_regular</item>
+        <item name="android:textAlignment">textStart</item>
     </style>
 
 </resources>

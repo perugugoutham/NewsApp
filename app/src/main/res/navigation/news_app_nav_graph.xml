@@ -9,7 +9,12 @@
         android:label="NewsFeedsFragment" >
         <action
             android:id="@+id/action_newsFeedsFragment_to_newsDetailsFragment"
-            app:destination="@id/newsDetailsFragment" />
+            app:destination="@id/newsDetailsFragment"
+            app:enterAnim="@anim/in_from_right"
+            app:popExitAnim="@anim/out_to_right"
+            app:exitAnim="@anim/out_to_left"
+            app:popEnterAnim="@anim/in_from_left"
+            />
     </fragment>
     <fragment
         android:id="@+id/newsDetailsFragment"

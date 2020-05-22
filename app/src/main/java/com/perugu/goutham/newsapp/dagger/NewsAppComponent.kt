@@ -1,6 +1,7 @@
 package com.perugu.goutham.newsapp.dagger
 
 import android.content.Context
+import com.perugu.goutham.newsapp.view.NewsDetailsFragment
 import com.perugu.goutham.newsapp.view.NewsFeedsFragment
 import dagger.Component
 
@@ -32,4 +33,6 @@ class NewsAppComponentProvider{
 interface NewsAppComponent {
 
     fun inject (newsFeedsFragment: NewsFeedsFragment)
+
+    fun inject (newsDetailsFragment: NewsDetailsFragment)
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.perugu.goutham.newsapp.Article
 import com.perugu.goutham.newsapp.R
 
-class NewsFeedsAdapter(var articles: List<Article>): RecyclerView.Adapter<NewsFeedsAdapter.NewsFeedViewHolder>() {
+class NewsFeedsAdapter(var articles: List<Article>, val iTalkToFragment: ITalkToFragment): RecyclerView.Adapter<NewsFeedsAdapter.NewsFeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsFeedViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,7 +23,9 @@ class NewsFeedsAdapter(var articles: List<Article>): RecyclerView.Adapter<NewsFe
     override fun onBindViewHolder(holder: NewsFeedViewHolder, position: Int) {
         val article = articles[position]
         holder.title.text = article.title
-
+        holder.itemView.setOnClickListener {
+            iTalkToFragment.onNewsFeedClicked(article)
+        }
     }
 
     fun updateList(articles: List<Article>) {

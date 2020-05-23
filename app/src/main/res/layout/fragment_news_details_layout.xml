@@ -43,7 +43,7 @@
             android:paddingEnd="@dimen/details_page_padding"
             android:paddingBottom="@dimen/details_page_bottom_padding">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description"
                 style="@style/DetailsDescription"
                 android:layout_width="0dp"
@@ -54,7 +54,7 @@
                 tools:text="M17 Entertainment announced today that it has sold its online dating assets to focus on its core live streaming business in Asia and other markets. Paktor Pte, which operates Paktor dating app and other services, was acquired by Kollective Ventures, a venture" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/source"
                 style="@style/DetailsSource"
                 android:layout_width="0dp"
@@ -66,7 +66,7 @@
                 tools:text="Techcrunsh" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/date"
                 style="@style/DetailsDate"
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toTopOf="@id/source"
                 tools:text="2020-05-21" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 style="@style/DetailsTitle"
                 android:layout_width="0dp"

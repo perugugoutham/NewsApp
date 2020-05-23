@@ -40,7 +40,7 @@ class NewsFeedsAdapter(
 
         holder.source.text = article.source?.name
 
-        val simpleDateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.US)
+        val simpleDateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
 
         if (article.publishedAt != null){
             holder.date.text = simpleDateFormat.format(article.publishedAt)

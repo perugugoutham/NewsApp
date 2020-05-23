@@ -71,7 +71,7 @@ class NewsDetailsFragment: Fragment() {
         val title = requireView().findViewById<TextView>(R.id.title)
         val source = requireView().findViewById<TextView>(R.id.source)
 
-        val simpleDateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.US)
+        val simpleDateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
 
         val date = requireView().findViewById<TextView>(R.id.date)
 

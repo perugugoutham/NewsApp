@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="@id/thumbail_image"
             app:layout_constraintTop_toBottomOf="@id/guide_line" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/feed_title"
             style="@style/FeedTitleStyle"
             android:layout_width="0dp"
@@ -58,7 +58,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Boeing decides $100 million to victims of 735Max crashes" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/source"
             style="@style/FeedSourceStyle"
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Tech Crunch" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/date"
             style="@style/FeedDate"
             android:layout_width="wrap_content"

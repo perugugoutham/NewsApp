@@ -33,8 +33,8 @@ class NetworkRequestRepository(
                 if (response.isSuccessful){
                     val responseString = response.body?.string()
                     val newsFeeds = gson.fromJson<NewsFeeds>(responseString, NewsFeeds::class.java)
-                    loaderState.postValue(LoaderState.SUCCESS)
                     storeArticleInDb(newsFeeds.articles)
+                    loaderState.postValue(LoaderState.SUCCESS)
                 }else {
                     loaderState.postValue(LoaderState.FAILED)
                 }

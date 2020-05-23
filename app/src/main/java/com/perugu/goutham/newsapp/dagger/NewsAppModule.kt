@@ -14,11 +14,14 @@ import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
 
 const val network_request_coroutine = "network_request_coroutine"
+const val ui_date_format = "ui_date_format"
 
 @Module
 class NewsAppModule(private val context: Context) {
@@ -58,6 +61,12 @@ class NewsAppModule(private val context: Context) {
     @Named(network_request_coroutine)
     fun provideNetworkRequestCoRoutine(): CoroutineDispatcher {
         return Dispatchers.IO
+    }
+
+    @Provides
+    @Named(ui_date_format)
+    fun provideUIDateFormat(): SimpleDateFormat {
+        return SimpleDateFormat("yyyy-MM-dd", Locale.US)
     }
 
     @Provides

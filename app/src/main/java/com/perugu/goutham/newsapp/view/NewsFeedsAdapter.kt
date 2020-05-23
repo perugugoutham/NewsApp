@@ -17,7 +17,8 @@ import java.util.*
 class NewsFeedsAdapter(
     private var articles: List<Article>,
     private val iTalkToFragment: ITalkToFragment,
-    private val picassoClient: Picasso
+    private val picassoClient: Picasso,
+    private val dateFormat: SimpleDateFormat
 ): RecyclerView.Adapter<NewsFeedsAdapter.NewsFeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsFeedViewHolder {
@@ -40,10 +41,8 @@ class NewsFeedsAdapter(
 
         holder.source.text = article.source?.name
 
-        val simpleDateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
-
         if (article.publishedAt != null){
-            holder.date.text = simpleDateFormat.format(article.publishedAt)
+            holder.date.text = dateFormat.format(article.publishedAt)
         }
 
         holder.itemView.setOnClickListener {

@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
 import com.perugu.goutham.newsapp.dagger.network_request_coroutine
+import com.perugu.goutham.newsapp.dagger.ui_date_format
 import com.perugu.goutham.newsapp.db.NewsDb
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
@@ -41,6 +42,10 @@ class NewsDetailsFragment: Fragment() {
 
     @Inject
     lateinit var picassoClient: Picasso
+
+    @Inject
+    @field:Named(ui_date_format)
+    lateinit var dateFormat: SimpleDateFormat
 
     @Inject
     @field:Named(network_request_coroutine)
@@ -71,8 +76,6 @@ class NewsDetailsFragment: Fragment() {
         val title = requireView().findViewById<TextView>(R.id.title)
         val source = requireView().findViewById<TextView>(R.id.source)
 
-        val simpleDateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
-
         val date = requireView().findViewById<TextView>(R.id.date)
 
         val newsDetailsFragmentArgs = NewsDetailsFragmentArgs.fromBundle(arguments!!)
@@ -82,7 +85,7 @@ class NewsDetailsFragment: Fragment() {
             title.text = article.title
             source.text = article.source?.name
             if (article.publishedAt != null){
-                date.text = simpleDateFormat.format(article.publishedAt)
+                date.text = dateFormat.format(article.publishedAt)
             }
 
             picassoClient.load(article.urlToImage).into(requireView().findViewById<ImageView>(R.id.thumbnail_image))

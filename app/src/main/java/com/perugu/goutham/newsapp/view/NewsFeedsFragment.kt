@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import com.perugu.goutham.newsapp.R
 import com.perugu.goutham.newsapp.dagger.NewsAppComponentProvider
 import com.perugu.goutham.newsapp.dagger.network_request_coroutine
+import com.perugu.goutham.newsapp.dagger.ui_date_format
 import com.perugu.goutham.newsapp.db.NewsDb
 import com.perugu.goutham.newsapp.viewmodel.LoaderState
 import com.perugu.goutham.newsapp.viewmodel.NewsFeedViewModelFactory
@@ -22,6 +23,7 @@ import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -38,6 +40,10 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
 
     @Inject
     lateinit var picassoClient: Picasso
+
+    @Inject
+    @field:Named(ui_date_format)
+    lateinit var dateFormat: SimpleDateFormat
 
     @Inject
     @field:Named(network_request_coroutine)
@@ -73,7 +79,7 @@ class NewsFeedsFragment: Fragment(), ITalkToFragment {
         val feedsRecyclerView = requireView().findViewById<RecyclerView>(R.id.feeds_recycler_view)
 
         if (newsFeedsAdapter == null){
-            newsFeedsAdapter = NewsFeedsAdapter(arrayListOf(), this, picassoClient)
+            newsFeedsAdapter = NewsFeedsAdapter(arrayListOf(), this, picassoClient, dateFormat)
         }
 
         feedsRecyclerView.adapter = newsFeedsAdapter

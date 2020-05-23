@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
-class InstrumentedTest {
+class NewsAppTests {
 
     private lateinit var newsViewModel: NewsViewModel
 

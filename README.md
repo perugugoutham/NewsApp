@@ -1,5 +1,9 @@
 # NewsApp
 
+The app display top news from TechCrunch. API and its key generated from https://newsapi.org
+
+Select the news headline -> Read a short description -> tap on description to view complete details in your browser.
+
 This app is made by following only best practices for Andorid App developement. It follows MVVM architecture.
 
 Libraries used:

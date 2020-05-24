@@ -11,6 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.gson.Gson
 import com.perugu.goutham.newsapp.db.NewsDb
 import com.perugu.goutham.newsapp.repository.NetworkRequestRepository
+import com.perugu.goutham.newsapp.viewmodel.LoaderState
 import com.perugu.goutham.newsapp.viewmodel.NewsViewModel
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
@@ -69,6 +70,15 @@ class InstrumentedTest {
         val article = value[2]
         val selectedAirtcle = getValue(newsViewModel.getArticle(article.url))
         selectedAirtcle shouldBe article
+    }
+
+    @Test
+    fun loaderStateTest(){
+        val initialLoaderSate = getValue(newsViewModel.getLoaderState())
+        initialLoaderSate shouldBe LoaderState.LOADING
+        newsViewModel.fetchNewsFeeds()
+        val afterRequest = getValue(newsViewModel.getLoaderState())
+        afterRequest shouldBe LoaderState.SUCCESS
     }
 
     @After
